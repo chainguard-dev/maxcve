@@ -2,7 +2,7 @@
 
 This repo generates a container image that maximizes the number of CVEs in the image, while minimizing the size of the image.
 
-The result is a 1.8 MB image that reports as having more than 20,000 CVEs. That's roughly one CVE per 100 bytes!
+The result is a 1.8 MB image that reports as having almost _30,000 CVEs_. That's roughly one CVE for every 62 bytes!
 
 ```
 $ time grype $(go run .) > /dev/null
