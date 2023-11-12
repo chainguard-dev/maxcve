@@ -55,8 +55,7 @@ func main() {
 			break
 		}
 	}
-	osRelease := `NAME="Alpine Linux"
-ID=wolfi
+	osRelease := `ID=wolfi
 NAME="Wolfi"
 PRETTY_NAME="Wolfi"
 VERSION_ID="20230201"
