@@ -2,12 +2,14 @@ package main
 
 import (
 	"archive/tar"
+	"bufio"
 	"bytes"
 	"compress/gzip"
 	"fmt"
 	"io"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/empty"
@@ -45,10 +47,24 @@ func main() {
 		}
 		if hdr.Name == "APKINDEX" {
 			hdr.Name = "lib/apk/db/installed"
+
+			var minimalAPKDB bytes.Buffer
+			scanner := bufio.NewScanner(tr)
+			for scanner.Scan() {
+				line := scanner.Text()
+				if strings.HasPrefix(line, "P:") || strings.HasPrefix(line, "V:") || strings.HasPrefix(line, "o:") || line == "" {
+					minimalAPKDB.WriteString(line + "\n")
+				}
+			}
+			if err := scanner.Err(); err != nil {
+				log.Fatal(err)
+			}
+
+			hdr.Size = int64(minimalAPKDB.Len())
 			if err := tw.WriteHeader(hdr); err != nil {
 				log.Fatal(err)
 			}
-			if _, err := io.Copy(tw, tr); err != nil {
+			if _, err := tw.Write(minimalAPKDB.Bytes()); err != nil {
 				log.Fatal(err)
 			}
 			log.Println("wrote /lib/apk/db/installed")
