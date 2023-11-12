@@ -22,7 +22,11 @@ Or, if you prefer to consume data visually:
 
 ![](severity.png)
 
+_Zero negligible vulns, nice!_
+
 ![](installed.png)
+
+_Real minimal base image for scale_
 
 ### How it works
 
