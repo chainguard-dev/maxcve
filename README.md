@@ -18,6 +18,12 @@ $ time grype $(go run .) > /dev/null
    └── by status:   24759 fixed, 4586 not-fixed, 0 ignored
 ```
 
+Or, if you prefer to consume data visually:
+
+![](severity.png)
+
+![](installed.png)
+
 ### How it works
 
 To minimize size, the image doesn't actually contain any packages. In fact, it only contains two files:
