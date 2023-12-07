@@ -1,0 +1,23 @@
+name: Release
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  push:
+    branches: ['main']
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  id-token: write
+  packages: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-go@v5
+      - uses: sigstore/cosign-installer@v3.2.0
+      - run: |
+          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+          go run . ghcr.io/${{github.repository}}

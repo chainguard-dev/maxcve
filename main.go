@@ -9,6 +9,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strings"
 
 	"github.com/google/go-containerregistry/pkg/name"
@@ -19,6 +20,11 @@ import (
 )
 
 func main() {
+	dst := "ttl.sh/maxcve"
+	if len(os.Args) > 1 {
+		dst = os.Args[1]
+	}
+
 	ir, err := http.Get("https://packages.wolfi.dev/os/x86_64/APKINDEX.tar.gz")
 	if err != nil {
 		log.Fatal(err)
@@ -103,7 +109,10 @@ HOME_URL="https://wolfi.dev"
 	if err != nil {
 		log.Fatal(err)
 	}
-	ref := name.MustParseReference("ttl.sh/maxcve")
+	ref, err := name.ParseReference(dst)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if err := remote.Write(ref, img); err != nil {
 		log.Fatal(err)
 	}
