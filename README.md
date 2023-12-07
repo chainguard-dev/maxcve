@@ -5,13 +5,8 @@ This repo generates a container image that maximizes the number of CVEs in the i
 The result is a 148 KB image that reports as having almost _30,000 CVEs_. That's roughly one CVE for every 5 bytes of image data!
 
 ```
-$ time grype $(go run .) > /dev/null
-2023/11/12 11:07:09 wrote /lib/apk/db/installed
-2023/11/12 11:07:09 wrote /etc/os-release
-2023/11/12 11:07:09 wrote ttl.sh/maxcve@sha256:c43609f71b0bf2d3f317d6347291bc070c09aab40cdcae5a16b723ea596620ab
+$ grype ghcr.io/imjasonh/maxcve > /dev/null
  ✔ Vulnerability DB                [no update available]
- ✔ Loaded image                                                                ttl.sh/maxcve@sha256:c43609f71b0bf2d3f317d6347291bc070c09aab40cdcae5a16b723ea596620ab
- ✔ Parsed image                                                                              sha256:9ccc9244966be8bc6c3bc6f33d88a2bc062cfd21b72c055b70a33c922d09a91a
  ✔ Cataloged packages              [26573 packages]
  ✔ Scanned for vulnerabilities     [29345 vulnerability matches]
    ├── by severity: 1925 critical, 17158 high, 8845 medium, 400 low, 0 negligible (1017 unknown)
@@ -27,6 +22,12 @@ _Zero negligible vulns, nice!_
 ![](installed.png)
 
 _Real minimal base image for scale_
+
+### Development
+
+```
+go run . ttl.sh/maxcve
+```
 
 ### How it works
 

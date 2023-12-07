@@ -12,6 +12,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/empty"
 	"github.com/google/go-containerregistry/pkg/v1/mutate"
@@ -113,7 +114,8 @@ HOME_URL="https://wolfi.dev"
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := remote.Write(ref, img); err != nil {
+	if err := remote.Write(ref, img,
+		remote.WithAuthFromKeychain(authn.DefaultKeychain)); err != nil {
 		log.Fatal(err)
 	}
 	d, err := img.Digest()
