@@ -21,5 +21,5 @@ jobs:
           go-version-file: 'go.mod'
       - uses: sigstore/cosign-installer@v3.2.0
       - run: |
-          docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
-          go run . ghcr.io/${{github.repository}}
+          docker login ghcr.io -u ${{github.actor}} -p ${{secrets.GITHUB_TOKEN}}
+          go run . ghcr.io/${{github.repository}}/maxcve
