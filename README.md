@@ -1,11 +1,14 @@
 # _MAXIMUM CVEs_
 
+[![Release](https://github.com/imjasonh/maxcve/actions/workflows/release.yaml/badge.svg)](https://github.com/imjasonh/maxcve/actions/workflows/release.yaml)
+
 This repo generates a container image that maximizes the number of CVEs in the image, while minimizing the size of the image.
 
 The result is a 148 KB image that reports as having almost _30,000 CVEs_. That's roughly one CVE for every 5 bytes of image data!
 
 ```
-$ grype ghcr.io/imjasonh/maxcve > /dev/null
+$ grype ghcr.io/imjasonh/maxcve/maxcve
+...
  ✔ Vulnerability DB                [no update available]
  ✔ Cataloged packages              [26573 packages]
  ✔ Scanned for vulnerabilities     [29345 vulnerability matches]
