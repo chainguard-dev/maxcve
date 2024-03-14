@@ -7,16 +7,17 @@ This repo generates a container image that maximizes the number of CVEs in the i
 The result is a 183 KB image that it has _more than 35,000 known vulnerabilities_. That's roughly one CVE for every 5 bytes of image data!
 
 ```
-$ grype ghcr.io/imjasonh/maxcve/maxcve 1> /dev/null
+grype ghcr.io/imjasonh/maxcve/maxcve 1> /dev/null
 ...
- ✔ Vulnerability DB                [no update available]
- ✔ Cataloged packages              [30996 packages]
- ✔ Scanned for vulnerabilities     [35030 vulnerability matches]
-   ├── by severity: 1966 critical, 19826 high, 11012 medium, 429 low, 0 negligible (1797 unknown)
-   └── by status:   27795 fixed, 7235 not-fixed, 0 ignored
+ ✔ Vulnerability DB                [updated]  
+ ✔ Cataloged contents
+   └── ✔ Packages                        [45,598 packages]  
+ ✔ Scanned for vulnerabilities     [249238 vulnerability matches]  
+   ├── by severity: 5080 critical, 47441 high, 34209 medium, 1386 low, 0 negligible (161122 unknown)
+   └── by status:   241041 fixed, 8197 not-fixed, 0 ignored 
 ```
 
-(As of Dec 7, 2023)
+(As of March 14, 2024)
 
 Or, if you prefer to consume data visually:
 
