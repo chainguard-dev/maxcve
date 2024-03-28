@@ -4,8 +4,6 @@
 
 This repo generates a container image that maximizes the number of CVEs in the image, while minimizing the size of the image.
 
-The result is a 183 KB image that it has _more than 35,000 known vulnerabilities_. That's roughly one CVE for every 5 bytes of image data!
-
 ```
 $ grype ghcr.io/chainguard-dev/maxcve/maxcve 1> /dev/null
    ├── ✔ Packages                        [48,215 packages]
