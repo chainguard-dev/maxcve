@@ -1,23 +1,21 @@
 # _MAXIMUM CVEs_
 
-[![Release](https://github.com/imjasonh/maxcve/actions/workflows/release.yaml/badge.svg)](https://github.com/imjasonh/maxcve/actions/workflows/release.yaml)
+[![Release](https://github.com/chainguard-dev/maxcve/actions/workflows/release.yaml/badge.svg)](https://github.com/chainguard-dev/maxcve/actions/workflows/release.yaml)
 
 This repo generates a container image that maximizes the number of CVEs in the image, while minimizing the size of the image.
 
 The result is a 183 KB image that it has _more than 35,000 known vulnerabilities_. That's roughly one CVE for every 5 bytes of image data!
 
 ```
-grype ghcr.io/imjasonh/maxcve/maxcve 1> /dev/null
-...
- ✔ Vulnerability DB                [updated]  
- ✔ Cataloged contents
-   └── ✔ Packages                        [45,598 packages]  
- ✔ Scanned for vulnerabilities     [249238 vulnerability matches]  
-   ├── by severity: 5080 critical, 47441 high, 34209 medium, 1386 low, 0 negligible (161122 unknown)
-   └── by status:   241041 fixed, 8197 not-fixed, 0 ignored 
+$ grype ghcr.io/chainguard-dev/maxcve/maxcve 1> /dev/null
+   ├── ✔ Packages                        [48,215 packages]
+   └── ✔ Executables                     [0 executables]
+ ✔ Scanned for vulnerabilities     [290565 vulnerability matches]
+   ├── by severity: 5968 critical, 50545 high, 38097 medium, 1390 low, 0 negligible (194565 unknown)
+   └── by status:   282221 fixed, 8344 not-fixed, 0 ignored
 ```
 
-(As of March 14, 2024)
+(As of March 28, 2024)
 
 Or, if you prefer to consume data visually:
 
