@@ -102,7 +102,7 @@ HOME_URL="https://wolfi.dev"
 
 	l, err := tarball.LayerFromOpener(func() (io.ReadCloser, error) {
 		return io.NopCloser(bytes.NewReader(buf.Bytes())), nil
-	})
+	}, tarball.WithCompressionLevel(gzip.BestCompression))
 	if err != nil {
 		log.Fatal(err)
 	}
