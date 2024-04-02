@@ -3,6 +3,7 @@ package main
 import (
 	"archive/tar"
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
 	"fmt"
 	"io"
