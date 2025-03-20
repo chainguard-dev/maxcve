@@ -52,6 +52,10 @@ For a similar (but opposite) demonstration of this, see [Malicious Compliance: R
 
 ### Proof
 
+The following script demonstrates that all the CVEs in the image are entirely due to the existence of the `/lib/apk/db/installed` file, which lists all the packages that are "installed".
+
+Running a Grype scan after removing that file from the image results in a Grype scan with zero CVEs:
+
 ```
 grype ghcr.io/chainguard-dev/maxcve/maxcve 1> /dev/null
 TEMP_DIR=$(mktemp -d) && \
