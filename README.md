@@ -49,3 +49,17 @@ Aside from being fun, this image demonstrates how scanners work -- and important
 At their most basic, scanners require images (1) tell them what OS they are, and (2) tell them what packages they contain. This image does both, but it does so in a way that is misleading.
 
 For a similar (but opposite) demonstration of this, see [Malicious Compliance: Reflections on Trusting Container Scanners](https://www.youtube.com/watch?v=9weGi0csBZM). In that talk, they mislead the scanner into finding fewer CVEs in the presence of vulnerable packages. In this demonstration, we mislead the scanner into finding vulnerabilities without installing any packages.
+
+### Proof
+
+```
+grype ghcr.io/chainguard-dev/maxcve/maxcve 1> /dev/null
+TEMP_DIR=$(mktemp -d) && \
+	crane export ghcr.io/chainguard-dev/maxcve/maxcve:latest - | tar -xvf - -C "$TEMP_DIR" && \
+	rm -f "$TEMP_DIR/lib/apk/db/installed" && \
+	tar -C "$TEMP_DIR" -cf - . | docker import - maxcve:noapkdb && \
+	rm -rf "$TEMP_DIR"
+grype maxcve:noapkdb 1> /dev/null
+```
+
+
